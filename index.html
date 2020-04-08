@@ -1,6 +1,20 @@
 
 <!DOCTYPE html>
 <style>
+body  {
+    min-width: 290px;
+    line-height: 1.3;
+    background-color: #000000;
+    letter-spacing: 1px;
+    color:#008CBA;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#main-doc {
+  position: absolute;
+  margin-left: 250px;
+  padding: 20px;
+  margin-bottom: 110px;
+}
 #navbar {
   position: fixed;
   min-width: 290px;
@@ -8,16 +22,28 @@
   left: 0px;
   width: 300px;
   height: 100%;
-  border-right: solid;
-  border-color: rgba(0, 22, 22, 0.4);
 }
-
+code {
+  display: block;
+  text-align: left;
+  white-space:pre;
+  position: relative;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1;
+  background-color: #f7f7f7;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+}
 @media only screen and (max-width: 815px) {
   /* For mobile phones: */
   #navbar ul {
     border: 1px solid;
     height: 207px;
   }
+
+
 
 </style>
 <html>
@@ -54,9 +80,15 @@
         </header>
 
         <!--Adjust number as require-->
-        <p></p>
-        <p></p>
-        <code></code>
+        <p>Bio</p>
+        C is a procedural programming language. It was initially developed by Dennis Ritchie between 1969 and 1973. It was mainly developed as a system programming language to write operating system. The main features of C language include low-level access to memory, simple set of keywords, and clean style, these features make C language suitable for system programming like operating system or compiler development.
+        <p>String literals</p>
+        I am studying the recently contributed TOC for core C language features. The Standard gives to string literals its own clause 6.4.5. Clause 6.4.4 Constants does not include string literals. The TOC seems to imply that string literals are a form of constants. Should "string literals" not be indented in the TOC? Newatthis (talk) 06:24, 25 December 2014 (PST)
+
+they are indeed a form of constants. I've updated the naming to reflect that. --Cubbi (talk) 09:39, 25 December 2014 (PST)
+        <code>int number = 5;      // integer variable
+number = 5.5;        // error
+double number;       // error</code>
 
     </section>
     <section class="main-section" id="Why_learn_C">
@@ -65,10 +97,48 @@
             Why learn C
         </header>
 
-        <p></p>
-        <p></p>
-
-        <code></code>
+        <p>Benefits</p>
+        Learning C programming has lot of benefits, but the foremost thing in which it helps is to understand the underlying architecture of how things works?
+        Consider a situation where a person learns to drive a Car. In this modern era with advancement in technology, we have many options when it comes to buying car. There are cars with auto-driving mode, auto gear change features etc which reduces the manual overheads and makes driving the car easier. Suppose the person learns driving on a auto-gear change enabled car. After learning driving, the person applied for a driving licence for which he need to pass a driving test. The driving test is now on a manual car with no auto-gear change feature. The person was even not able to answer some basic questions related to gears as he was not even aware of it and eventually ended up getting disqualified.
+Learning C has a similar benefit. If the person had learned driving on a manual car, he could have easily driven the automatic car as well. Similarly, if a person learns C programming first, it will help him to learn any modern programming language as well. As learning C help to understand a lot of underlying architecture of operating system. Like, pointers, working with memory locations etc.
+        <p>Client code</p> 
+        <code>#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+ 
+#define MAXRCVLEN 500
+#define PORTNUM 2300
+ 
+int main(int argc, char *argv[])
+{
+   char buffer[MAXRCVLEN + 1]; /* +1 so we can add null terminator */
+   int len, mysocket;
+   struct sockaddr_in dest; 
+ 
+   mysocket = socket(AF_INET, SOCK_STREAM, 0);
+  
+   memset(&dest, 0, sizeof(dest));                /* zero the struct */
+   dest.sin_family = AF_INET;
+   dest.sin_addr.s_addr = htonl(INADDR_LOOPBACK); /* set destination IP number - localhost, 127.0.0.1*/ 
+   dest.sin_port = htons(PORTNUM);                /* set destination port number */
+ 
+   connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
+  
+   len = recv(mysocket, buffer, MAXRCVLEN, 0);
+ 
+   /* We have to null terminate the received data ourselves */
+   buffer[len] = '\0';
+ 
+   printf("Received %s (%d bytes).\n", buffer, len);
+ 
+   close(mysocket);
+   return EXIT_SUCCESS;
+}</code>
      
     </section>
     <section class="main-section" id="C_levels_learning">
@@ -76,25 +146,168 @@
         <header>
             C levels learning
         </header>
-        <p></p>
-        <p></p>
-        <code></code>
+        <p>Where it use</p>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>C is a Middle-Level Language. </li>
+            The middle-level languages are somewhere between the Low-level machine understandable assembly languages and High-Level user friendly languages. Being a middle-level language, C reduces the gap between the low-level and high-level languages. It can be used for writing operating systems as well as doing application level programming.
+            <li>Helps to understand the fundamentals of Computer Theories. </li>
+            Most of the theories related to computers like Computer Networks, Compiler Designing, Computer Architecture, Operating Systems are based on C programming language and requires a good knowledge of C programming if you are working on them. In the modern high level languages, the machine level details are hidden from the user, so in order to work with CPU cache, memory, network adapters, learning C programming is a must.
+            <li>Fewer Libraries.</li>C programming language has fewer libraries in comparison with other high-level languages. So, learning C programming also clears programming concepts to a great extent as you have to write lot of things from scratch. You will not be dependent on the programming language entirely for implementing some basic operations and implementing them on your own will also help you to build your analytical skills.
+            <li>C is very fast in terms of execution time. </li>
+            Programs written and compiled in C executes much faster than compared to any other programming language. C programming language is very fast in terms of execution as it does not have any additional processing overheads such as garbage collection or preventing memory leaks etc. The programmer must take care of these things on his own.
+            <li>Embedded Programming. </li>C is extensively used in Embedded Programming. Embedded Programming is also referred to as micro-controller programming, where C program is used to control micro-controllers. Microcontrollers and embedded programming is widely used in auto-motives, Robotics, Hardwares etc.
         </ul>
+        <p>Server example</p>
+        <code>#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+ 
+#define PORTNUM 2300
+ 
+int main(int argc, char *argv[])
+{
+    char* msg = "Hello World !\n";
+  
+    struct sockaddr_in dest; /* socket info about the machine connecting to us */
+    struct sockaddr_in serv; /* socket info about our server */
+    int mysocket;            /* socket used to listen for incoming connections */
+    socklen_t socksize = sizeof(struct sockaddr_in);
+
+    memset(&serv, 0, sizeof(serv));           /* zero the struct before filling the fields */
+    serv.sin_family = AF_INET;                /* set the type of connection to TCP/IP */
+    serv.sin_addr.s_addr = htonl(INADDR_ANY); /* set our address to any interface */
+    serv.sin_port = htons(PORTNUM);           /* set the server port number */    
+
+    mysocket = socket(AF_INET, SOCK_STREAM, 0);
+  
+    /* bind serv information to mysocket */
+    bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
+
+    /* start listening, allowing a queue of up to 1 pending connection */
+    listen(mysocket, 1);
+    int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
+  
+    while(consocket)
+    {
+        printf("Incoming connection from %s - sending welcome\n", inet_ntoa(dest.sin_addr));
+        send(consocket, msg, strlen(msg), 0); 
+        close(consocket);
+        consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
+    }
+
+    close(mysocket);
+    return EXIT_SUCCESS;
+}</code>
+      
     </section>
     <section class="main-section" id="C_examples_projects">
         <!--topic of the section-->
         <header>
             C examples projects
         </header>
-        <p></p>
-        <p></p>
-        <code></code>
+        <p>Bank Management System</p>
+        <code>int main()
+{
+    char pass[10],password[10]="codewithc";
+    int i=0;
+    printf("\n\n\t\tEnter the password to login:");
+    scanf("%s",pass);
+ 
+    if (strcmp(pass,password)==0)
+        {printf("\n\nPassword Match!\nLOADING");
+        for(i=0;i<=6;i++)
+        {
+            fordelay(100000000);
+            printf(".");
+        }
+                system("cls");
+            menu();
+        }
+    else
+        {   printf("\n\nWrong password!!\a\a\a");
+            login_try:
+            printf("\nEnter 1 to try again and 0 to exit:");
+            scanf("%d",&main_exit);
+            if (main_exit==1)
+                    {
+
+                        system("cls");
+                        main();
+                    }
+
+            else if (main_exit==0)
+                    {
+                    system("cls");
+                    close();}
+            else
+                    {printf("\nInvalid!");
+                    fordelay(1000000000);
+                    system("cls");
+                    goto login_try;}
+
+        }
+        return 0;
+}
+</code>
+        <p>Calendar Application</p>
+        <code>int main(){
+    ClearConsoleToColors(15, 1);
+    SetConsoleTitle("Calender Project - Programming-technique.blogspot.com");
+    int choice;
+    char ch = 'a';
+    while(1){
+        system("cls");
+        printf("1. Find Out the Day\n");
+        printf("2. Print all the day of month\n");
+        printf("3. Add Note\n");
+        printf("4. EXIT\n");
+        printf("ENTER YOUR CHOICE : ");
+        scanf("%d",&choice);
+        system("cls");
+        switch(choice){
+            case 1:
+                printf("Enter date (DD MM YYYY) : ");
+                scanf("%d %d %d",&date.dd,&date.mm,&date.yy);
+                printf("Day is : %s",getDay(date.dd,date.mm,date.yy));
+                printf("\nPress any key to continue......");
+                getch();
+                break;
+            case 2 :
+                printf("Enter month and year (MM YYYY) : ");
+                scanf("%d %d",&date.mm,&date.yy);
+                system("cls");
+                while(ch!='q'){
+                    printMonth(date.mm,date.yy,20,5);
+                    ch = getch();
+                    if(ch == 'n'){
+                        increase_month(&date.mm,&date.yy);
+                        system("cls");
+                        printMonth(date.mm,date.yy,20,5);
+                    }else if(ch == 'p'){
+                        decrease_month(&date.mm,&date.yy);
+                        system("cls");
+                        printMonth(date.mm,date.yy,20,5);
+                    }else if(ch == 's'){
+                        showNote(date.mm);
+                        system("cls");
+                    }
+                }
+                break;
+            case 3:
+                AddNote();
+                break;
+            case 4 :
+                exit(0);
+        }
+    }
+    return 0;
+}
+</code>
 
     </section>
     <section class="main-section" id="C_and_Cplusplus">
@@ -102,9 +315,16 @@
         <header>
             C and Cplusplus
         </header>
-        <p></p>
-        <p></p>
-        <code></code>
+        <p>History of C++</p>
+        The C++ programming language has a history going back to 1979, when Bjarne Stroustrup was doing work for his Ph.D. thesis. One of the languages Stroustrup had the opportunity to work with was a language called Simula, which as the name implies is a language primarily designed for simulations. The Simula 67 language - which was the variant that Stroustrup worked with - is regarded as the first language to support the object-oriented programming paradigm. Stroustrup found that this paradigm was very useful for software development, however the Simula language was far too slow for practical use.
+        <p>Tutorials</p>
+        <code>class class_name {
+  access_specifier_1:
+    member1;
+  access_specifier_2:
+    member2;
+  ...
+} object_names;</code>
   
     </section>
 
@@ -114,9 +334,13 @@
         <header>
             Refrences
         </header>
-        <p></p>
-        <p></p>
-        <code></code>
+        <p><a href = "https://www.geeksforgeeks.org/why-learning-c-programming-is-a-must/"> geeksforgeeks</a></p>
+        <p><a href = "https://en.cppreference.com/w/">cppreference</a></p>
+        <p><a href = "https://en.wikibooks.org/wiki/C_Programming/Networking_in_UNIX">wikibooks</a></p>
+       <p><a href = "https://www.cplusplus.com/">cplusplus</a></p>
+       <p><a href = "https://www.codewithc.com/mini-project-in-c-calendar/">codewithc</a></p>
+       <p><a href = "https://codepen.io/freeCodeCamp/full/NdrKKL">freeCodeCamp</a></p>
+        <code>printf("Hello world");</code>
   
     </section>
 </main>
